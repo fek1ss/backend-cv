@@ -50,6 +50,7 @@ const PORT = process.env.PORT || 5000;
     });
   } catch (err) {
     console.error("❌ Ошибка подключения к базе:", err.message);
+    console.error(err)
     process.exit(1); // завершаем контейнер, Docker перезапустит его
   }
 })();
