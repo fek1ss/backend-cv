@@ -4,7 +4,7 @@ import mysql from "mysql2/promise";
 // dotenv.config(); // УДАЛЕНО
 
 // Изменяем pool, чтобы он принимал URL или, если URL нет, использовал старые параметры
-const pool = mysql.createPool(process.env.DATABASE_URL || {
+const pool = mysql.createPool(process.env.MYSQL_URL || {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
