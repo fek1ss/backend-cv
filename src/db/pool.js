@@ -1,9 +1,6 @@
 import mysql from "mysql2/promise";
-// import dotenv from "dotenv"; // УДАЛЕНО
 
-// dotenv.config(); // УДАЛЕНО
-
-// Изменяем pool, чтобы он принимал URL или, если URL нет, использовал старые параметры
+// pool.js будет использовать полную строку подключения (URL)
 const pool = mysql.createPool(process.env.MYSQL_URL || {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -12,8 +9,8 @@ const pool = mysql.createPool(process.env.MYSQL_URL || {
   port: process.env.DB_PORT, 
   waitForConnections: true,
   connectionLimit: 10,
-  // Отключаем строгую проверку SSL (для безопасности, если это нужно)
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined 
+  // Мы убрали SSL, чтобы устранить ошибки сертификатов:
+  // ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined 
 });
 
 export default pool;
