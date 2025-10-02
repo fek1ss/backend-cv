@@ -50,13 +50,13 @@ export const updateContact = async (req, res) => {
     }
 
     await connection.query(
-      "UPDATE Contact SET label=?, link=?, iconUrl=COALESCE(?, iconUrl) WHERE id=?",
+      "UPDATE сontact SET label=?, link=?, iconUrl=COALESCE(?, iconUrl) WHERE id=?",
       [label, link, iconUrl, id]
     );
 
     res.json({ message: "Contact updated", iconUrl });
   } catch (err) {
-    console.error("Update Contact error:", err);
+    console.error("Update сontact error:", err);
     res.status(500).json({ error: "Server error" });
   }
 };

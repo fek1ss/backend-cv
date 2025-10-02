@@ -10,7 +10,7 @@ export const getHeroes = async (req, res) => {
   }
 };
 
-// POST /api/hero
+// PATCH /api/hero
 export const createHero = async (req, res) => {
   const { name, photoUrl, summary } = req.body;
   try {
