@@ -17,8 +17,19 @@ import bookRouter from "./routes/book.routes.js";
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://cv-site-ahgxv8zzj-damirs-projects-6f19b3f2.vercel.app"
+];
+
 app.use(cors({
-  origin: "http://localhost:5173" || "https://cv-site-ahgxv8zzj-damirs-projects-6f19b3f2.vercel.app"
+  origin: function(origin, callback){
+    if(!origin || allowedOrigins.includes(origin)){
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 app.use(express.json());
