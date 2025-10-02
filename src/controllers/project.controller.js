@@ -2,7 +2,7 @@ import connection from "../db/pool.js";
 
 export const getProjects = async (req, res) => {
   try {
-    const [rows] = await connection.query("SELECT * FROM Projects ORDER BY dateStart DESC");
+    const [rows] = await connection.query("SELECT * FROM projects ORDER BY dateStart DESC");
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -17,7 +17,7 @@ export const createProject = async (req, res) => {
   }
   try {
     const [result] = await connection.query(
-      "INSERT INTO Projects (name, description, dateStart, dateEnd, imageUrl, link) VALUES (?, ?, ?, ?, ?, ?)",
+      "INSERT INTO projects (name, description, dateStart, dateEnd, imageUrl, link) VALUES (?, ?, ?, ?, ?, ?)",
       [name, description, dateStart, dateEnd, imageUrl, link]
     );
     res.json({ id: result.insertId, message: "Project created", imageUrl });
@@ -35,7 +35,7 @@ export const updateProject = async (req, res) => {
   }
   try {
     const [result] = await connection.query(
-      "UPDATE Projects SET name=?, description=?, dateStart=?, dateEnd=?, link=?, imageUrl=COALESCE(?, imageUrl) WHERE id=?",
+      "UPDATE projects SET name=?, description=?, dateStart=?, dateEnd=?, link=?, imageUrl=COALESCE(?, imageUrl) WHERE id=?",
       [name, description, dateStart, dateEnd, link, imageUrl, id]
     );
     if (result.affectedRows === 0) return res.json({ error: "Nothing changed" });
@@ -48,7 +48,7 @@ export const updateProject = async (req, res) => {
 export const deleteProject = async (req, res) => {
   const { id } = req.params;
   try {
-    const [result] = await connection.query("DELETE FROM Projects WHERE id=?", [id]);
+    const [result] = await connection.query("DELETE FROM projects WHERE id=?", [id]);
     if (result.affectedRows === 0) return res.json({ error: "Not found" });
     res.json({ message: "Project deleted" });
   } catch (err) {

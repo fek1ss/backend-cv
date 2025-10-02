@@ -2,7 +2,7 @@ import connection from "../db/pool.js";
 
 export const getSkills = async (req, res) => {
   try {
-    const [rows] = await connection.query("SELECT * FROM Skill ORDER BY id DESC");
+    const [rows] = await connection.query("SELECT * FROM skill ORDER BY id DESC");
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -21,12 +21,12 @@ export const createSkill = async (req, res) => {
     }
 
     const [result] = await connection.query(
-      "INSERT INTO Skill (name, iconUrl) VALUES (?, ?)",
+      "INSERT INTO skill (name, iconUrl) VALUES (?, ?)",
       [name, iconUrl]
     );
 
     res.json({ 
-      message: "Skill created", 
+      message: "skill created", 
       skillId: result.insertId, 
       iconUrl 
     });
@@ -49,7 +49,7 @@ export const updateSkill = async (req, res) => {
     }
 
     const [result] = await connection.query(
-      "UPDATE Skill SET name=?, iconUrl=COALESCE(?, iconUrl) WHERE id=?",
+      "UPDATE skill SET name=?, iconUrl=COALESCE(?, iconUrl) WHERE id=?",
       [name, iconUrl, id]
     );
 
@@ -68,7 +68,7 @@ export const updateSkill = async (req, res) => {
 export const deleteSkill = async (req, res) => {
   const { id } = req.params;
   try {
-    await connection.query("DELETE FROM Skill WHERE id=?", [id]);
+    await connection.query("DELETE FROM skill WHERE id=?", [id]);
     res.json({ message: "Skill deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -7,7 +7,7 @@ export const getPositions = async (req, res) => {
     SELECT p.id as positionId, p.title, p.startDate, p.endDate,
           c.id as companyId, c.name as companyName
     FROM positions p
-    JOIN Company c ON p.companyId = c.id
+    JOIN company c ON p.companyId = c.id
     ORDER BY p.startDate DESC
   `;
 
