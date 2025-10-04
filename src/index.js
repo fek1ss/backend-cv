@@ -19,7 +19,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://cv-site-ahgxv8zzj-damirs-projects-6f19b3f2.vercel.app"
+  "https://cv-site-4o7y.vercel.app"
 ];
 
 app.use(cors({
